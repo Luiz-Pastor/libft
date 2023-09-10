@@ -5,6 +5,7 @@ FLAGS=-Wall -Werror -Wextra
 NAME=libft.a
 ##############################################################################
 
+# Obligatory files
 C_FILES=	ft_memset.c		\
 			ft_bzero.c		\
 			ft_memcpy.c		\
@@ -42,6 +43,7 @@ C_FILES=	ft_memset.c		\
 			ft_putnbr_fd.c
 C_OBJ=$(C_FILES:%.c=%.o)
 
+# Optional files
 BONUS_FILES=	ft_lstnew.c			\
 				ft_lstadd_front.c	\
 				ft_lstsize.c		\
@@ -81,4 +83,6 @@ fclear: clear
 re: fclear $(NAME)
 
 # ".PHONY" is added to prevent it from detecting files named "clear", "fclear" or "re"
-.PHONY: clear fclear re
+.PHONY: all clear fclear re
+
+include makefile_tests
