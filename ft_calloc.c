@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 09:21:54 by lpastor-          #+#    #+#             */
+/*   Updated: 2023/09/12 09:21:54 by lpastor-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_calloc(size_t nitems, size_t size)
@@ -6,10 +18,7 @@ void	*ft_calloc(size_t nitems, size_t size)
 	size_t	index;
 
 	index = 0;
-	if (nitems <= 0 || size <= 0)
-		memory = (char *)malloc(1);
-	else
-		memory = (char *)malloc(nitems * size);
+	memory = (char *)malloc(nitems * size);
 	if (!memory)
 		return (NULL);
 	while (index < (nitems * size))
