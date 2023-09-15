@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 07:51:38 by lpastor-          #+#    #+#             */
+/*   Updated: 2023/09/12 07:51:38 by lpastor-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -253,6 +265,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
  * 
  * @param big		The destination string, null-terminated
  * @param little	The soruce string, null-terminated
+ * @param len		Max count of characters searched
  * 
  * @return	If `little` is empty, `big` is returned; if `little` occurs nowhere
  *			in `big`, NULL is returned; otherwise, a pointer to the first
