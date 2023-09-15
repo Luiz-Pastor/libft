@@ -9,7 +9,6 @@ NAME=libft.a
 C_FILES=	ft_memset.c		\
 			ft_bzero.c		\
 			ft_memcpy.c		\
-			ft_memccpy.c	\
 			ft_memchr.c		\
 			ft_memcmp.c		\
 			ft_strlen.c		\
@@ -43,7 +42,7 @@ C_FILES=	ft_memset.c		\
 			ft_putnbr_fd.c
 C_OBJ=$(C_FILES:%.c=%.o)
 
-# Optional files
+# Optional files (bonus part)
 BONUS_FILES=	ft_lstnew.c			\
 				ft_lstadd_front.c	\
 				ft_lstsize.c		\
@@ -71,18 +70,18 @@ bonus: $(C_OBJ) $(BONUS_OBJ)
 
 ##############################################################################
 
-# "clear" deletes all the .o files
-clear:
+# "clean" deletes all the .o files
+clean:
 	@rm -f $(C_OBJ) $(BONUS_OBJ)
 
-# "fclear" deletes all the .o files and the library generated
-fclear: clear
+# "fclean" deletes all the .o files and the library generated
+fclean: clean
 	@rm -f $(NAME)
 
 # "fclear" deletes all the .o files, the lybrary generated and make a new one
-re: fclear $(NAME)
+re: fclean $(NAME)
 
-# ".PHONY" is added to prevent it from detecting files named "clear", "fclear" or "re"
-.PHONY: all clear fclear re
+# ".PHONY" is added to prevent it from detecting files named "all", "clean", "fclean" or "re"
+.PHONY: all clean fclean re
 
 include makefile_tests
