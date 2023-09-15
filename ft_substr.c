@@ -30,7 +30,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!memory)
 		return (NULL);
 	while (count < len && s[start])
-	{	
+	{
 		memory[count] = s[start];
 		count++;
 		start++;
