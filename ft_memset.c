@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpastor- <lpastor-@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 09:23:38 by lpastor-          #+#    #+#             */
+/*   Updated: 2023/09/12 09:23:38 by lpastor-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memset(void *str, int c, size_t n)
@@ -6,8 +18,6 @@ void	*ft_memset(void *str, int c, size_t n)
 	char	*casted;
 
 	index = 0;
-	if (!str)
-		return (NULL);
 	casted = (char *)str;
 	while (index < n)
 	{
