@@ -1,12 +1,14 @@
 ##############################################################################
-CC=cc
-FLAGS=-Wall -Werror -Wextra
+CC := cc
+FLAGS := -Wall -Werror -Wextra
 ##############################################################################
-NAME=libft.a
+LIBFT_NAME=libft.a
+##############################################################################
+SRC_FOLDER=src
 ##############################################################################
 
 # Obligatory files
-C_FILES=	ft_memset.c		\
+LIBFT_FILES=	ft_memset.c		\
 			ft_bzero.c		\
 			ft_memcpy.c		\
 			ft_memchr.c		\
@@ -40,10 +42,10 @@ C_FILES=	ft_memset.c		\
 			ft_putstr_fd.c	\
 			ft_putendl_fd.c	\
 			ft_putnbr_fd.c
-C_OBJ=$(C_FILES:%.c=%.o)
+LIBFT_OBJ=$(LIBFT_FILES:%.c=%.o)
 
 # Optional files (bonus part)
-BONUS_FILES=	ft_lstnew.c			\
+LIBFT_BONUS_FILES=	ft_lstnew.c			\
 				ft_lstadd_front.c	\
 				ft_lstsize.c		\
 				ft_lstlast.c		\
@@ -52,36 +54,36 @@ BONUS_FILES=	ft_lstnew.c			\
 				ft_lstclear.c		\
 				ft_lstiter.c		\
 				ft_lstmap.c
-BONUS_OBJ=$(BONUS_FILES:%.c=%.o)
+LIBFT_BONUS_OBJ=$(LIBFT_BONUS_FILES:%.c=%.o)
 
 ##############################################################################
 
-all: $(NAME)
+all: $(LIBFT_NAME)
 
-$(NAME): $(C_OBJ)
-	ar crs $(NAME) $^
-
-bonus: $(C_OBJ) $(BONUS_OBJ)
-	ar crs $(NAME) $^
+$(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ)
+	ar crs $(LIBFT_NAME) $^
 
 # It compiles all the .c files to .o if it is necessary
-%.o: %.c
+%.o: $(SRC_FOLDER)/%.c
 	$(CC) $(FLAGS) -c $<
 
 ##############################################################################
 
 # "clean" deletes all the .o files
 clean:
-	@rm -f $(C_OBJ) $(BONUS_OBJ)
+	@rm -f $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ)
 
 # "fclean" deletes all the .o files and the library generated
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(LIBFT_NAME)
 
 # "fclear" deletes all the .o files, the lybrary generated and make a new one
-re: fclean $(NAME)
+re: fclean $(LIBFT_NAME)
 
 # ".PHONY" is added to prevent it from detecting files named "all", "clean", "fclean" or "re"
 .PHONY: all clean fclean re
 
-include makefile_tests
+##############################################################################
+
+env:
+	@rm -rf .gitignore README.md .git tests/
