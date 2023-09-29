@@ -14,9 +14,13 @@
 
 void	*ft_calloc(size_t nitems, size_t size)
 {
-	char	*memory;
-	size_t	index;
+	char				*memory;
+	size_t				index;
+	unsigned long long	max;
 
+	max = nitems * size;
+	if (max > 4294967295)
+		return (NULL);
 	index = 0;
 	memory = (char *)malloc(nitems * size);
 	if (!memory)
