@@ -1,6 +1,6 @@
 ##############################################################################
 CC := cc
-FLAGS := -Wall -Werror -Wextra
+FLAGS := -Wall -Werror -Wextra -g3
 ##############################################################################
 LIBFT_NAME=libft.a
 ##############################################################################
@@ -61,11 +61,11 @@ LIBFT_BONUS_OBJ=$(LIBFT_BONUS_FILES:%.c=%.o)
 all: $(LIBFT_NAME)
 
 $(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ)
-	ar crs $(LIBFT_NAME) $^
+	@ar crs $(LIBFT_NAME) $^
 
 # It compiles all the .c files to .o if it is necessary
 %.o: $(SRC_FOLDER)/%.c
-	$(CC) $(FLAGS) -c $<
+	@$(CC) $(FLAGS) -c $<
 
 ##############################################################################
 
