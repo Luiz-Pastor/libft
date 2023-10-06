@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../libft.h"
+#include <stdio.h>
 
 static int	is_space(char ch)
 {
@@ -56,6 +57,7 @@ int	ft_strict_atoi(const char *str, int *flag)
 	count = 0;
 	index = 0;
 	*flag = 0;
+	printf("> Mirando %s\n", str);
 	while (is_space(str[index]))
 		index++;
 	if (str[index] == '+' || str[index] == '-')
