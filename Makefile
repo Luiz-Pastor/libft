@@ -1,6 +1,6 @@
 ##############################################################################
 CC := cc
-FLAGS := -Wall -Werror -Wextra -g3
+FLAGS := -Wall -Werror -Wextra -O3
 ##############################################################################
 LIBFT_NAME=libft.a
 ##############################################################################
@@ -45,7 +45,7 @@ LIBFT_FILES=	ft_memset.c		\
 LIBFT_OBJ=$(LIBFT_FILES:%.c=%.o)
 
 # Optional files (bonus part)
-LIBFT_BONUS_FILES=	ft_lstnew.c			\
+LIBFT_BONUS_FILES=	ft_lstnew.c		\
 				ft_lstadd_front.c	\
 				ft_lstsize.c		\
 				ft_lstlast.c		\
@@ -56,22 +56,38 @@ LIBFT_BONUS_FILES=	ft_lstnew.c			\
 				ft_lstmap.c
 LIBFT_BONUS_OBJ=$(LIBFT_BONUS_FILES:%.c=%.o)
 
+# Get_next_line files
+LIBFT_GNL_FILES= 	get_next_line.c			\
+					get_next_line_utils.c
+LIBFT_GNL_OBJ=$(LIBFT_GNL_FILES:%.c=%.o)
+
+# File that I created
+LIBFT_PERSONAL_FILES=	ft_strcmp.c
+LIBFT_PERSONAL_OBJ=$(LIBFT_PERSONAL_FILES:%.c=%.o)
+
 ##############################################################################
 
 all: $(LIBFT_NAME)
 
-$(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ)
+$(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ) $(LIBFT_GNL_OBJ) $(LIBFT_PERSONAL_OBJ)
 	@ar crs $(LIBFT_NAME) $^
 
 # It compiles all the .c files to .o if it is necessary
 %.o: $(SRC_FOLDER)/%.c
-	@$(CC) $(FLAGS) -c $<
+	$(CC) $(FLAGS) -c $<
 
 ##############################################################################
 
+# "nm", "norm" and "norminette" check if the c and h files are ok according to the standard
+nm: norminette
+norm: norminette
+norminette:
+	@norminette src/
+	@norminette libft.h
+
 # "clean" deletes all the .o files
 clean:
-	@rm -f $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ)
+	@rm -f $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ) $(LIBFT_GNL_OBJ) $(LIBFT_PERSONAL_OBJ)
 
 # "fclean" deletes all the .o files and the library generated
 fclean: clean
