@@ -16,6 +16,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# ifndef GNL_MAX_FD
+#  define GNL_MAX_FD 2048
+# endif
+
 /**
  * @brief t_list
  *
@@ -29,6 +37,12 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+/****************************
+*                           *
+*      MANDATORY PART       * 
+*                           *
+*****************************/
 
 /**
  * @brief	It converts a string to integer
@@ -485,14 +499,36 @@ t_list	*ft_lstnew(void *content);
  */
 int		ft_lstsize(t_list *lst);
 
-/****************************
-*                           *
-*     PERSONAL FUNCIONS     *
-*                           *
-****************************/
+/************************************
+*                                   *
+*      GET_NEXT_LINE FUNCTIONS      *
+*                                   *
+*************************************/
+
+size_t	gnl_strlen(char *str);
+char	*gnl_cpy(char *data);
+int		gnl_find_ch(char *data, char ch);
+void	*gnl_free(void **memory);
+char	*add_line(char *data, char *add);
 
 /**
- * @brief	It converts a string to integer. If there is a strnage character,
+ * @brief	It reads a line from a file, represented by a file descriptor
+ * 
+ * @param fd	The file descriptor of the file
+ * 
+ * @return	The line readed (allocated with a malloc),
+ *			or NULL if the file dont have more lines or in case of error
+ */
+char	*get_next_line(int fd);
+
+/******************************
+*                             *
+*      PERSONAL FUNCIONS      *
+*                             *
+*******************************/
+
+/**
+ * @brief	It converts a string to integer. If there is a strange character,
  * 			the conversion stops and the `flag` get a negative value
  * 
  * @param str	The string to be converted
@@ -501,6 +537,17 @@ int		ft_lstsize(t_list *lst);
  * @return	The int value produced by interpreting the input characters
  *			as a number
  */
-int	ft_strict_atoi(const char *str, int *flag);
+int		ft_strict_atoi(const char *str, int *flag);
+
+/**
+ * @brief	It compares 2 strings.
+ * 
+ * @param s1	The first string
+ * @param s2	The second string
+ * 
+ * @return	0 if two strings are equal, a positive number if the first is
+ * 			greater, or negative number if the second is greater
+ */
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
