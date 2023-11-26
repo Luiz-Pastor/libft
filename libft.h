@@ -192,8 +192,10 @@ void	*ft_memset(void *str, int c, size_t n);
  * 
  * @param c		The character to send
  * @param fd	The file descriptor to write about
+ * 
+ * @return	Number of printed characters
  */
-void	ft_putchar_fd(char c, int fd);
+int		ft_putchar_fd(char c, int fd);
 
 /**
  * @brief	Sends the string `s` to the specified file descriptor,
@@ -201,24 +203,30 @@ void	ft_putchar_fd(char c, int fd);
  * 
  * @param s		The string to send
  * @param fd	The file descriptor to write about
+ * 
+ * @return	Number of printed characters
  */
-void	ft_putendl_fd(char *s, int fd);
+int		ft_putendl_fd(char *s, int fd);
 
 /**
  * @brief	Sends the number `n` to the specified file descriptor
  * 
  * @param n		The number to send
  * @param fd	The file descriptor to write about
+ * 
+ * @return	Number of printed characters
  */
-void	ft_putnbr_fd(int n, int fd);
+int		ft_putnbr_fd(int n, int fd);
 
 /**
  * @brief	Sends the string `s` to the specified file descriptor
  * 
  * @param s		The string to send
  * @param fd	The file descriptor to write about
+ * 
+ * @return	Number of printed characters
  */
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
 
 /**
  * @brief	Reserve an array of strings resulting from separating the string
