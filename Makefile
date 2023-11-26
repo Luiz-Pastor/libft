@@ -82,8 +82,7 @@ $(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ) $(LIBFT_GNL_OBJ) $(LIBFT_PERSONAL
 nm: norminette
 norm: norminette
 norminette:
-	@norminette src/
-	@norminette libft.h
+	@norminette src/ libft.h
 
 # "clean" deletes all the .o files
 clean:
