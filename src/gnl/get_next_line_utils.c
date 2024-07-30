@@ -6,11 +6,12 @@
 /*   By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 08:02:16 by lpastor-          #+#    #+#             */
-/*   Updated: 2024/07/30 10:34:45 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:01:25 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
+#include "../../include/gnl_private.h"
 
 char	*gnl_cpy(char *data)
 {

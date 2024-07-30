@@ -6,11 +6,12 @@
 /*   By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 07:54:18 by lpastor-          #+#    #+#             */
-/*   Updated: 2024/07/30 10:34:50 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:45:39 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
+#include "../../include/gnl_private.h"
 
 static char	*get_line(char *data)
 {
