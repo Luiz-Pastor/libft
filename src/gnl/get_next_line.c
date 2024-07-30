@@ -6,7 +6,7 @@
 /*   By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 07:54:18 by lpastor-          #+#    #+#             */
-/*   Updated: 2024/07/29 21:35:22 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:34:50 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*delete_line(char *data)
 		index_data++;
 	if (!data[index_data - 1])
 		return (data);
-	count = gnl_strlen(data) - index_data;
+	count = ft_strlen(data) - index_data;
 	if (!count)
 		return (gnl_free((void **)&data));
 	new = (char *) malloc(count + 1);

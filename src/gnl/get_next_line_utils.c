@@ -6,23 +6,11 @@
 /*   By: lpastor- <lpastor-@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 08:02:16 by lpastor-          #+#    #+#             */
-/*   Updated: 2024/07/29 21:35:22 by lpastor-         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:34:45 by lpastor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
-
-size_t	gnl_strlen(char *str)
-{
-	size_t	index;
-
-	index = 0;
-	if (!str)
-		return (0);
-	while (str[index])
-		index++;
-	return (index);
-}
 
 char	*gnl_cpy(char *data)
 {
@@ -32,7 +20,7 @@ char	*gnl_cpy(char *data)
 	index = 0;
 	if (!data)
 		return (NULL);
-	cpy = (char *) malloc(gnl_strlen(data) + 1);
+	cpy = (char *) malloc(ft_strlen(data) + 1);
 	if (!cpy)
 		return (NULL);
 	while (data[index])
@@ -75,7 +63,7 @@ char	*add_line(char *data, char *add)
 
 	index_in = 0;
 	index_new = 0;
-	new = (char *) malloc(gnl_strlen(data) + gnl_strlen(add) + 1);
+	new = (char *) malloc(ft_strlen(data) + ft_strlen(add) + 1);
 	if (!new)
 	{
 		gnl_free((void **)&add);
