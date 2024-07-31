@@ -1,14 +1,25 @@
 ##############################################################################
-CC := cc
-FLAGS := -Wall -Werror -Wextra -O3
+NAME = libft.a
+#####################################################################################################################
+COLOR_RED		= \e[31m
+COLOR_GREEN		= \e[32m
+COLOR_ORANGE	= \e[33m
+COLOR_BLUE		= \e[34m
+COLOR_CYAN		= \e[36m
+COLOR_RESET		= \e[0m
 ##############################################################################
-LIBFT_NAME=libft.a
+CC		:= cc
+CFLAGS	:= -Wall -Werror -Wextra -O3 -fdiagnostics-color=always
 ##############################################################################
-SRC_FOLDER=src
+SRC_FOLDER = src
 ##############################################################################
+VPATH =	src/gnl:src/libc:src/list:src/own:src/ft_printf
+
+OBJ_FOLDER	=	obj
+OBJ			:=
 
 # Obligatory files
-LIBFT_FILES=	ft_memset.c		\
+LIBC_SRC =	ft_memset.c		\
 			ft_bzero.c		\
 			ft_memcpy.c		\
 			ft_memchr.c		\
@@ -23,6 +34,7 @@ LIBFT_FILES=	ft_memset.c		\
 			ft_isalnum.c	\
 			ft_isascii.c	\
 			ft_isprint.c	\
+			ft_isspace.c	\
 			ft_toupper.c	\
 			ft_tolower.c	\
 			ft_calloc.c		\
@@ -41,40 +53,71 @@ LIBFT_FILES=	ft_memset.c		\
 			ft_putchar_fd.c	\
 			ft_putstr_fd.c	\
 			ft_putendl_fd.c	\
-			ft_putnbr_fd.c
-LIBFT_OBJ=$(LIBFT_FILES:%.c=%.o)
+			ft_putnbr_fd.c	\
+			ft_strcmp.c
+OBJ += $(LIBC_SRC:%.c=$(OBJ_FOLDER)/%.o)
 
 # Optional files (bonus part)
-LIBFT_BONUS_FILES=	ft_lstnew.c		\
-				ft_lstadd_front.c	\
-				ft_lstsize.c		\
-				ft_lstlast.c		\
-				ft_lstadd_back.c	\
-				ft_lstdelone.c		\
-				ft_lstclear.c		\
-				ft_lstiter.c		\
-				ft_lstmap.c
-LIBFT_BONUS_OBJ=$(LIBFT_BONUS_FILES:%.c=%.o)
+LIST_SRC=	ft_lstnew.c		\
+			ft_lstadd_front.c	\
+			ft_lstsize.c		\
+			ft_lstlast.c		\
+			ft_lstadd_back.c	\
+			ft_lstdelone.c		\
+			ft_lstclear.c		\
+			ft_lstiter.c		\
+			ft_lstmap.c
+OBJ += $(LIST_SRC:%.c=$(OBJ_FOLDER)/%.o)
 
 # Get_next_line files
-LIBFT_GNL_FILES= 	get_next_line.c			\
-					get_next_line_utils.c
-LIBFT_GNL_OBJ=$(LIBFT_GNL_FILES:%.c=%.o)
+GNL_SRC= 	get_next_line.c			\
+			get_next_line_utils.c
+OBJ += $(GNL_SRC:%.c=$(OBJ_FOLDER)/%.o)
 
-# File that I created
-LIBFT_PERSONAL_FILES=	ft_strcmp.c
-LIBFT_PERSONAL_OBJ=$(LIBFT_PERSONAL_FILES:%.c=%.o)
+# Ft_printf files
+FT_PRINTF_SRC=	ft_placeholder_hexanumber.c	\
+				ft_placeholder_number.c	\
+				ft_placeholder_pointer.c	\
+				ft_placeholder_string.c	\
+				ft_placeholder_utilities.c	\
+				ft_printf.c
+OBJ += $(FT_PRINTF_SRC:%.c=$(OBJ_FOLDER)/%.o)
+
+# Own functions
+OWN_SRC=	ft_strict_atoi.c
+OBJ += $(OWN_SRC:%.c=$(OBJ_FOLDER)/%.o)
 
 ##############################################################################
 
-all: $(LIBFT_NAME)
+all: print_start $(NAME) print_ok
 
-$(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ) $(LIBFT_GNL_OBJ) $(LIBFT_PERSONAL_OBJ)
-	@ar crs $(LIBFT_NAME) $^
+$(NAME): $(OBJ)
+	@ar crs $(NAME) $(OBJ)
 
 # It compiles all the .c files to .o if it is necessary
-%.o: $(SRC_FOLDER)/%.c
-	$(CC) $(FLAGS) -c $<
+$(OBJ_FOLDER)/%.o: %.c
+	@mkdir -p $(OBJ_FOLDER)
+
+	@RES=$$($(CC) $(CFLAGS) -c $< -o $@ 2> $(OBJ_FOLDER)/.error; echo $$?);							\
+	if [ $$RES -ne 0 ]; then																		\
+		echo "\r$(COLOR_RED)[ ERROR ] $(COLOR_ORANGE)Packeting \"libft\" library$(COLOR_RESET)";	\
+		tail -n +1 $(OBJ_FOLDER)/.error;															\
+		exit $$RES;																					\
+	fi
+	
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+CLEAN_EXTENSION:
+	@rm -rf $(OBJ_FOLDER)/.c $(OBJ_FOLDER)/.error
+
+
+##############################################################################
+
+print_start:
+	@echo -n "$(COLOR_CYAN)[......] $(COLOR_ORANGE)Packeting \"libft\" library$(COLOR_RESET)"
+
+print_ok:
+	@echo "\r$(COLOR_GREEN)[  OK  ] $(COLOR_ORANGE)Packeting \"libft\" library$(COLOR_RESET)"
 
 ##############################################################################
 
@@ -82,23 +125,27 @@ $(LIBFT_NAME): $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ) $(LIBFT_GNL_OBJ) $(LIBFT_PERSONAL
 nm: norminette
 norm: norminette
 norminette:
-	@norminette src/ libft.h
+	@clear
+	@norminette src/ include/ libft.h
 
 # "clean" deletes all the .o files
 clean:
-	@rm -f $(LIBFT_OBJ) $(LIBFT_BONUS_OBJ) $(LIBFT_GNL_OBJ) $(LIBFT_PERSONAL_OBJ)
+	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_FOLDER)
 
 # "fclean" deletes all the .o files and the library generated
 fclean: clean
-	@rm -f $(LIBFT_NAME)
+	@rm -rf $(NAME)
 
 # "fclear" deletes all the .o files, the lybrary generated and make a new one
-re: fclean $(LIBFT_NAME)
-
-# ".PHONY" is added to prevent it from detecting files named "all", "clean", "fclean" or "re"
-.PHONY: all clean fclean re
+re: fclean all
 
 ##############################################################################
 
 env:
 	@rm -rf .gitignore README.md .git tests/
+
+##############################################################################
+
+# ".PHONY" is added to prevent it from detecting files named "all", "clean", "fclean" or "re"
+.PHONY: all clean fclean re nm norm norminette

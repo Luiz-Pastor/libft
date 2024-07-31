@@ -38,11 +38,9 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-/****************************
-*                           *
-*      MANDATORY PART       * 
-*                           *
-*****************************/
+/*============================================================================*/
+/* SECTION:                      Libc functions                               */
+/*============================================================================*/
 
 /**
  * @brief	It converts a string to integer
@@ -117,6 +115,15 @@ int		ft_isdigit(int c);
  * @return	It returns a nonzero value if `c` is a printable character
  */
 int		ft_isprint(int c);
+
+/**
+ * @brief	Check if a character is a space
+ * 
+ * @param c	Integer to check
+ * 
+ * @return	It returns a nonzero value if `c` is a space
+ */
+int		ft_isspace(int c);
 
 /**
  * @brief	Reserving memory, generate a string that represents the integer
@@ -409,11 +416,20 @@ int		ft_tolower(int c);
  */
 int		ft_toupper(int c);
 
-/******************
-*                 * 
-*      BONUS      *
-*                 *
-*******************/
+/**
+ * @brief	It compares 2 strings.
+ * 
+ * @param s1	The first string
+ * @param s2	The second string
+ * 
+ * @return	0 if two strings are equal, a positive number if the first is
+ * 			greater, or negative number if the second is greater
+ */
+int		ft_strcmp(const char *s1, const char *s2);
+
+/*============================================================================*/
+/* SECTION:                      List functions                               */
+/*============================================================================*/
 
 /**
  * @brief	Add the `new` node to the end of the `lst` list.
@@ -507,17 +523,9 @@ t_list	*ft_lstnew(void *content);
  */
 int		ft_lstsize(t_list *lst);
 
-/************************************
-*                                   *
-*      GET_NEXT_LINE FUNCTIONS      *
-*                                   *
-*************************************/
-
-size_t	gnl_strlen(char *str);
-char	*gnl_cpy(char *data);
-int		gnl_find_ch(char *data, char ch);
-void	*gnl_free(void **memory);
-char	*add_line(char *data, char *add);
+/*============================================================================*/
+/* SECTION:                'Get next line' function                          */
+/*============================================================================*/
 
 /**
  * @brief	It reads a line from a file, represented by a file descriptor
@@ -529,11 +537,23 @@ char	*add_line(char *data, char *add);
  */
 char	*get_next_line(int fd);
 
-/******************************
-*                             *
-*      PERSONAL FUNCIONS      *
-*                             *
-*******************************/
+/*============================================================================*/
+/* SECTION:                      Printf function                              */
+/*============================================================================*/
+
+/**
+ * @brief	Printf function
+ * 
+ * @param	text Text to print
+ * @param	... Variables to print
+ * 
+ * @return	Number of characters printed
+ */
+int		ft_printf(const char *text, ...);
+
+/*============================================================================*/
+/* SECTION:                    Personal functions                             */
+/*============================================================================*/
 
 /**
  * @brief	It converts a string to integer. If there is a strange character,
@@ -546,16 +566,5 @@ char	*get_next_line(int fd);
  *			as a number
  */
 int		ft_strict_atoi(const char *str, int *flag);
-
-/**
- * @brief	It compares 2 strings.
- * 
- * @param s1	The first string
- * @param s2	The second string
- * 
- * @return	0 if two strings are equal, a positive number if the first is
- * 			greater, or negative number if the second is greater
- */
-int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
