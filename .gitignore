@@ -1,4 +1,9 @@
+# VSCode folder
 .vscode
-libft.a
+
+# Object files
 *.o
-test
+obj/
+
+# Lib generated
+libft.a
