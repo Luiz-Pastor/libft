@@ -84,13 +84,15 @@ FT_PRINTF_SRC=	ft_placeholder_hexanumber.c	\
 OBJ += $(FT_PRINTF_SRC:%.c=$(OBJ_FOLDER)/%.o)
 
 # Own functions
-OWN_SRC=	ft_strict_atoi.c
+OWN_SRC=	ft_strict_atoi.c	\
+			ft_free.c
 OBJ += $(OWN_SRC:%.c=$(OBJ_FOLDER)/%.o)
 
 ##############################################################################
 
 all: print_start $(NAME) print_ok
 
+# Lib compilation rule
 $(NAME): $(OBJ)
 	@ar crs $(NAME) $(OBJ)
 
@@ -104,12 +106,6 @@ $(OBJ_FOLDER)/%.o: %.c
 		tail -n +1 $(OBJ_FOLDER)/.error;															\
 		exit $$RES;																					\
 	fi
-	
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-CLEAN_EXTENSION:
-	@rm -rf $(OBJ_FOLDER)/.c $(OBJ_FOLDER)/.error
-
 
 ##############################################################################
 
@@ -142,10 +138,11 @@ re: fclean all
 
 ##############################################################################
 
+# Rule to clean all related to the git files/project
 env:
 	@rm -rf .gitignore README.md .git tests/
 
 ##############################################################################
 
 # ".PHONY" is added to prevent it from detecting files named "all", "clean", "fclean" or "re"
-.PHONY: all clean fclean re nm norm norminette
+.PHONY: all clean fclean re print_start print_ok nm norm norminette

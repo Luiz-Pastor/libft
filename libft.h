@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -566,5 +567,14 @@ int		ft_printf(const char *text, ...);
  *			as a number
  */
 int		ft_strict_atoi(const char *str, int *flag);
+
+/**
+ * @brief	Function to free the memory of `count` variables. Also, they are
+ * 			setted to `NULL`
+ * 
+ * @param	count Number of variables that the function is going to check
+ * @param	... Variable to free. They must be passed as `void **`
+ */
+void	ft_free(int count, ...);
 
 #endif
