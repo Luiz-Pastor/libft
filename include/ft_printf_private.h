@@ -13,8 +13,7 @@
 #ifndef FT_PRINTF_PRIVATE_H
 # define FT_PRINTF_PRIVATE_H
 
-# include <unistd.h>
-# include <stdarg.h>
+# include "../libft.h"
 
 # define PLACEHOLDERS	"csdpiuxX%"
 # define HEXA_MIN		"0123456789abcdef"
