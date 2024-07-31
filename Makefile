@@ -13,7 +13,7 @@ CFLAGS	:= -Wall -Werror -Wextra -O3 -fdiagnostics-color=always
 ##############################################################################
 SRC_FOLDER = src
 ##############################################################################
-VPATH =	src/gnl:src/libc:src/list:src/own:src/ft_printf
+VPATH =	src/gnl:src/libc:src/list:src/ft_printf:src/matrix:src/own
 
 OBJ_FOLDER	=	obj
 OBJ			:=
@@ -82,6 +82,13 @@ FT_PRINTF_SRC=	ft_placeholder_hexanumber.c	\
 				ft_placeholder_utilities.c	\
 				ft_printf.c
 OBJ += $(FT_PRINTF_SRC:%.c=$(OBJ_FOLDER)/%.o)
+
+# Matrix files
+MATRIX_SRC=	matrix_add.c		\
+			matrix_length.c		\
+			matrix_search.c		\
+			matrix_free.c
+OBJ += $(MATRIX_SRC:%.c=$(OBJ_FOLDER)/%.o)
 
 # Own functions
 OWN_SRC=	ft_strict_atoi.c	\
